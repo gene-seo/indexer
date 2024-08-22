@@ -12,7 +12,7 @@ logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %
 
 # Constants
 SCOPES = ['https://www.googleapis.com/auth/indexing', 'openid', 'https://www.googleapis.com/auth/userinfo.email']
-REDIRECT_URI = 'https://your-app-name.streamlit.app'  # Update this with your Streamlit Cloud URL
+REDIRECT_URI = 'https://indexer-udtjm78jffotdonak9obsp.streamlit.app'  # Update this with your Streamlit Cloud URL
 
 def create_flow():
     client_config = json.loads(st.secrets["google_oauth"]["client_secret"])
