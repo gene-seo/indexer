@@ -11,18 +11,18 @@ from googleapiclient.errors import HttpError
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Constants
-CLIENT_SECRETS_FILE = 'client_secret.json'
 SCOPES = ['https://www.googleapis.com/auth/indexing', 'openid', 'https://www.googleapis.com/auth/userinfo.email']
-REDIRECT_URI = 'http://localhost:8501'
+REDIRECT_URI = 'https://indexer-udtjm78jffotdonak9obsp.streamlit.app'  # Update this with your Streamlit Cloud URL
 
 def create_flow():
-    if not os.path.exists(CLIENT_SECRETS_FILE):
-        st.error(f"The file {CLIENT_SECRETS_FILE} was not found. Please ensure it's in the correct location.")
+    client_config = json.loads(os.environ.get('CLIENT_SECRET', '{}'))
+    if not client_config:
+        st.error("CLIENT_SECRET environment variable is not set.")
         return None
     
     try:
-        return Flow.from_client_secrets_file(
-            CLIENT_SECRETS_FILE,
+        return Flow.from_client_config(
+            client_config,
             scopes=SCOPES,
             redirect_uri=REDIRECT_URI)
     except Exception as e:
